@@ -1,6 +1,6 @@
 <?php
 // Le namespace "config" permet de ranger la classe Router dans un espace logique et d'éviter les conflits de noms.
-namespace config;
+namespace Config;
 
 // On importe le contrôleur d'erreurs pour afficher une page 404
 use App\Controllers\ErrorController;

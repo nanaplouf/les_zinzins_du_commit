@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use PDO;
+use Config\Database;
+
+
 class User
 {
     //? = si je te donne tu sera un int sinon tu sera null
@@ -24,6 +28,28 @@ class User
         $this->description = $description;
         $this->creation_date = $creation_date;
         $this->id_role = $id_role;
+    }
+
+    public function saveUser()
+    {
+        $pdo = Database::getConnection();
+        $sql = "INSERT INTO `user` (`pseudo`, `password`, `email`, `picture`, `description`, `creation_date`, `id_role`) VALUES (?,?,?,?,?,?,?)";
+        $statement = $pdo->prepare($sql);
+        return $statement->execute([$this->pseudo, $this->password, $this->email, $this->picture, $this->description, $this->creation_date, $this->id_role]);
+    }
+
+    public function getUserByEmail(): bool
+    {
+        $pdo = Database::getConnection();
+        $sql = "SELECT `email` FROM `user` WHERE `email` = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$this->email]);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     //les get

@@ -8,9 +8,9 @@ require_once(__DIR__ . "/partials/head.view.php");
             <label for="pseudo" class="form-label">Pseudo :</label>
             <input type="text" name="pseudo" id="pseudo" placeholder="Toto" class="form-control">
             <?php 
-            if(isset($arrayError['pseudo'])){
+            if(isset($this->arrayError['pseudo'])){
                 ?>
-                    <p class="text-danger"><?= $arrayError['pseudo']?></p>
+                    <p class="text-danger"><?= $this->arrayError['pseudo']?></p>
                 <?php
             }
             ?>
@@ -19,9 +19,9 @@ require_once(__DIR__ . "/partials/head.view.php");
             <label for="email" class="form-label">Email :</label>
             <input type="email" name="email" id="email" placeholder="Toto@gmail.com" class="form-control">
             <?php 
-            if(isset($arrayError['email'])){
+            if(isset($this->arrayError['email'])){
                 ?>
-                    <p class="text-danger"><?= $arrayError['email']?></p>
+                    <p class="text-danger"><?= $this->arrayError['email']?></p>
                 <?php
             }
             ?>
@@ -30,9 +30,9 @@ require_once(__DIR__ . "/partials/head.view.php");
             <label for="password" class="form-label">Mot de pase :</label>
             <input type="password" name="password" id="password" class="form-control">
             <?php 
-            if(isset($arrayError['password'])){
+            if(isset($this->arrayError['password'])){
                 ?>
-                    <p class="text-danger"><?= $arrayError['password']?></p>
+                    <p class="text-danger"><?= $this->arrayError['password']?></p>
                 <?php
             }
             ?>
@@ -41,9 +41,9 @@ require_once(__DIR__ . "/partials/head.view.php");
             <label for="description" class="form-label">Parle moi de ton côté zinzin:</label>
             <textarea class="form-control" id="description" name="description" style="height: 100px"></textarea>
             <?php 
-            if(isset($arrayError['description'])){
+            if(isset($this->arrayError['description'])){
                 ?>
-                    <p class="text-danger"><?= $arrayError['description']?></p>
+                    <p class="text-danger"><?= $this->arrayError['description']?></p>
                 <?php
             }
             ?>
