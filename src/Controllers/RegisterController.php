@@ -25,7 +25,6 @@ class RegisterController extends AbstractController
             if(empty($this->arrayError)){
                 $today = date('Y-m-d');
                 $user = new User(null, $pseudo, $password, $email, null, $description, $today, 2);
-                var_dump($user);
                 $user->saveUser();
 
             }

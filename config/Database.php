@@ -1,6 +1,6 @@
 <?php
 
-namespace config;
+namespace Config;
 
 use PDO;
 use Exception;
@@ -18,9 +18,11 @@ class Database
             );
             //echo "Connexion réussie ✅";
 
+
         } catch (Exception $e) {
             // Gestion d'erreur
             die("Erreur de connexion ❌ : " . $e->getMessage());
         };
+        return $pdo;
     }
 }

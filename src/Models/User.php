@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use PDO;
-use config\Database;
+use Config\Database;
+
 
 class User
 {
@@ -33,6 +34,7 @@ class User
     {
         $pdo = Database::getConnection();
         $sql = "INSERT INTO `user` (`pseudo`, `password`, `email`, `picture`, `description`, `creation_date`, `id_role`) VALUES (?,?,?,?,?,?,?)";
+        var_dump($pdo);
         $statement = $pdo->prepare($sql);
         return $statement->execute([$this->pseudo, $this->password, $this->email, $this->picture, $this->description, $this->creation_date, $this->id_role]);
     }
