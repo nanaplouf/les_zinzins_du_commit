@@ -26,9 +26,9 @@ class Router
      * @param string $controllerClass Le nom du contrôleur (ex: "LoginController")
      * @param string $method La méthode du contrôleur à exécuter (ex: "index")
      */
-    public function addRoute(string $pattern, string $controllerName, string $method)
+    public function addRoute(string $nameURI, string $controllerName, string $method)
     {
-        $this->routes[$pattern] = [
+        $this->routes[$nameURI] = [
             'controller' => $controllerName,
             'method' => $method
         ];
