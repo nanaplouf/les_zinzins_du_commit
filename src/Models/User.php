@@ -14,7 +14,7 @@ class User
     private ?string $creation_date;
     private ?int $id_role;
 
-    public function __construct(?int $id_user, ?$string $pseudo, ?string $password, ?string $email, ?string $picture, ?string $description, ?string $creation_date, ?int $id_role)
+    public function __construct(?int $id_user, ?string $pseudo, ?string $password, ?string $email, ?string $picture, ?string $description, ?string $creation_date, ?int $id_role)
     {
         $this->id_user = $id_user;
         $this->pseudo = $pseudo;
