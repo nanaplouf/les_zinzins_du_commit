@@ -5,9 +5,9 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Utils\AbstractController;
 
-class LoginController extends AbstractController
+class SessionController extends AbstractController
 {
-    public function index ()
+    public function login ()
     {
         if(isset($_POST['login'])){
             $email = htmlspecialchars($_POST['email']);
@@ -17,13 +17,11 @@ class LoginController extends AbstractController
             $this->totalCheck('password', $password);
 
             if(!$this->arrayError){
-                $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                $user = new User(null, null, $passwordHash, $email, null, null, null, null);
+                $user = new User(null, null, $password, $email, null, null, null, null);
 
                 $myUser = $user->getUserByEmail();
                 if($myUser){
-                    $this->debug($myUser);
-                    $verifPassword = password_verify($passwordHash, $myUser->getPassword());
+                    $verifPassword = password_verify($password, $myUser->getPassword());
 
                     if($verifPassword){
                         
@@ -38,6 +36,8 @@ class LoginController extends AbstractController
                             'id_user' => $myUser->getIdUser()
                         ];
 
+                        $this->redirectToRoute('/', 301);
+
                     }else{
                         $this->errorMessage('Ton adresse email ou mot de passe n\'est pas correcte');
                     }
@@ -48,5 +48,11 @@ class LoginController extends AbstractController
             }
         }
         require_once(__DIR__ . '/../Views/login.view.php');
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        $this->redirectToRoute('/', 200);
     }
 }

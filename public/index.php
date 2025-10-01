@@ -7,6 +7,7 @@ $router = new Router;
 
 $router->addRoute('/', 'HomeController', 'index');
 $router->addRoute('/inscription', 'RegisterController', 'index');
-$router->addRoute('/connexion', 'LoginController', 'index');
+$router->addRoute('/connexion', 'SessionController', 'login');
+$router->addRoute('/deconnexion', 'SessionController', 'logout');
 
 $router->handleRequest();

@@ -76,7 +76,7 @@ class User
     }
     public function getDescription(): ?string
     {
-        return $this->getDescription;
+        return $this->description;
     }
     public function getCreationDate() : ?string
     {

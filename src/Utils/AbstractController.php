@@ -99,4 +99,10 @@ abstract class AbstractController
         var_dump($info);
         echo '</pre>';
     }
+
+    public function redirectToRoute($route, $code){
+        http_response_code($code);
+        header("Location: {$route}");
+        exit;
+    }
 }
