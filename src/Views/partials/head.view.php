@@ -20,15 +20,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <?php
-          if(isset($_SESSION['user'])){
-            if($_SESSION['user']['id_role'] === "1"){
-              ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="/addheros">Ajouter un hero</a>
-                </li>
-              <?php
-            }
-        ?>
+          if(isset($_SESSION['user'])){?>
+            <li class="nav-item">
+            <a class="nav-link" href="/ajoutCommit">Ajouter un commit</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/deconnexion">Se déconnecter</a>
           </li>
