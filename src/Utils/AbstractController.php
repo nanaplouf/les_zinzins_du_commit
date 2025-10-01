@@ -84,4 +84,19 @@ abstract class AbstractController
         //retourne mon tableau d'erreur:
         return $this->arrayError;
     }
+
+    public function errorMessage($myMessage){
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= $myMessage ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+    }
+
+    public function debug ($info){
+        echo '<pre>';
+        var_dump($info);
+        echo '</pre>';
+    }
 }
