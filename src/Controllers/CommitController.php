@@ -24,7 +24,7 @@ class CommitController extends AbstractController
             }
             require_once(__DIR__ . "/../Views/addCommit.view.php");
         }else{
-            $this->redirectToRoute('/');
+            $this->redirectToRoute('/', 302);
         }
     }
 }
