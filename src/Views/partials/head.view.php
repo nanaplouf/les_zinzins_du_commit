@@ -11,3 +11,40 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Les zinzins du commit</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <?php
+          if(isset($_SESSION['user'])){
+            if($_SESSION['user']['id_role'] === "1"){
+              ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="/addheros">Ajouter un hero</a>
+                </li>
+              <?php
+            }
+        ?>
+          <li class="nav-item">
+            <a class="nav-link" href="/deconnexion">Se déconnecter</a>
+          </li>
+        <?php
+          } else {
+        ?>
+          <li class="nav-item">
+            <a class="nav-link" href="/inscription">S'inscrire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/connexion">Se connecter</a>
+          </li>
+        <?php
+        }
+        ?>
+      </ul>
+    </div>
+  </div>
+</nav>
