@@ -56,6 +56,14 @@ class Commit
 
     }
 
+    public function editCommit()
+    {
+        $pdo = Database::getConnection();
+        $sql = "UPDATE `commit` SET `text` = ?, `modification_date` = ?, `picture` = ? WHERE `id_commit` = ?";
+        $stmt = $pdo->prepare($sql);
+        return $stmt->execute([$this->text, $this->modification_date, $this->picture, $this->id_commit]);
+    }
+
     public function getIdCommit(): ?int
     {
         return $this->id_commit;
