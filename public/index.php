@@ -10,5 +10,6 @@ $router->addRoute('/inscription', 'RegisterController', 'index');
 $router->addRoute('/connexion', 'SessionController', 'login');
 $router->addRoute('/deconnexion', 'SessionController', 'logout');
 $router->addRoute('/ajoutCommit', 'CommitController', 'addCommit');
+$router->addRoute('/commit', 'CommitController', 'commit');
 
 $router->handleRequest();
