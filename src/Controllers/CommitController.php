@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Comment;
 use App\Models\Commit;
 use App\Utils\AbstractController;
 
@@ -39,6 +40,17 @@ class CommitController extends AbstractController
 
             if($myCommit)
             {
+                if(isset($_POST['addComment'])){
+                    $text = htmlspecialchars($_POST['comment']);
+                    $this->totalCheck('comment', $text);
+                    if(empty($this->arrayError)){
+                        $today = date("Y-m-d");
+                        $comment = new Comment(null, $text, $today, null, $id, $_SESSION['user']['id_user']);
+                        $comment->addComment();
+                        $this->redirectToRoute('/commit?id=' . $id, 200);
+                    }
+                }
+
                 require_once(__DIR__ . "/../Views/commit.view.php");
             }else{
                 $this->redirectToRoute('/', 302);

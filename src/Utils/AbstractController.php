@@ -27,7 +27,7 @@ abstract class AbstractController
         $regexPassword = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
         $regexDescription = '/^[a-zA-Zà-üÀ-Ü ,!?;.:()<>$@£\'\"\-_°€&%#<>\-+\/0-9œ]{0,1000}$/';
         $regexImg = '/^([0-9a-z_\-.A-Zà-üÀ-Ü]){0,255}$/';
-        $regexText = '/^[a-zA-Zà-üÀ-Ü ,!?;.:()<>$@£\'\"\-_°€&%#<>\-+\/0-9œ]{6,1000}$/';
+        $regexText = '/^[a-zA-Zà-üÀ-Ü ,!?;.:()<>$@£\'\"\-_°€&%#<>\-+\/0-9œ]{5,1000}$/';
 
         //on prend le nom de l'input
         switch($nameInput){
@@ -74,7 +74,11 @@ abstract class AbstractController
                     $this->arrayError['commit'] = 'Merci de renseigner un texte correcte!';
                 }
                 break;
-
+            case 'comment':
+                if(!preg_match($regexText, $value)){
+                    $this->arrayError['comment'] = 'Merci de renseigner un texte correcte!';
+                }
+                break;
         }
     }
 
