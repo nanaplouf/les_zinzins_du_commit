@@ -40,6 +40,7 @@ class CommitController extends AbstractController
 
             if($myCommit)
             {
+                //formulaire du commentaire
                 if(isset($_POST['addComment'])){
                     $text = htmlspecialchars($_POST['comment']);
                     $this->totalCheck('comment', $text);
@@ -50,6 +51,9 @@ class CommitController extends AbstractController
                         $this->redirectToRoute('/commit?id=' . $id, 200);
                     }
                 }
+
+                $searchComment = new Comment(null, null, null, null, $id, null);
+                $comments = $searchComment->getCommentByCommit();
 
                 require_once(__DIR__ . "/../Views/commit.view.php");
             }else{
