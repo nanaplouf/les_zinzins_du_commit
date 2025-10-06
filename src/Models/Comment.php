@@ -54,6 +54,11 @@ class Comment
         return $comments;
     }
 
+    //méthode pour aller chercher un commentaire depuis sont id:
+
+    //méthode pour modifier le commentaire:
+
+
     public function getIdComment(): ?int
     {
         return $this->id_comment;

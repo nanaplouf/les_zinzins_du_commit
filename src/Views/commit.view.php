@@ -59,6 +59,7 @@ require_once(__DIR__ . "/partials/head.view.php");
                             <?= $comment->getModificationDate() ? $comment->getModificationDate() : $comment->getCreationDate(); ?>
                         </figcaption>
                         </figure>
+                        <a class="btn btn-warning"  href="/modifCommentaire?id=<?= $comment->getIdComment() ?>">Modifier</a>
                     </div>
                     </div>
                 <?php
