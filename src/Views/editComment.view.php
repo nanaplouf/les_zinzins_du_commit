@@ -6,7 +6,7 @@ require_once(__DIR__ . "/partials/head.view.php");
     <div class="container">
         <div class="form-group">
             <label for="comment" class="form-label">Quelque chose à dire ?</label>
-            <textarea class="form-control" id="comment" name="comment" style="height: 100px">Ici le commentaire</textarea>
+            <textarea class="form-control" id="comment" name="comment" style="height: 100px"><?= $myComment->getText(); ?></textarea>
             <?php
             if(isset($this->arrayError['comment'])){
                 ?>
@@ -15,7 +15,7 @@ require_once(__DIR__ . "/partials/head.view.php");
             }
             ?>
         </div>
-        <button type="submit" name="addComment" class="btn btn-success">Commenter !</button>
+        <button type="submit" name="editComment" class="btn btn-warning">Modifier !</button>
     </div>
 </form>
 <?php
