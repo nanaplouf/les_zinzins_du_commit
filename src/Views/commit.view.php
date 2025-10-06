@@ -2,25 +2,25 @@
 require_once(__DIR__ . "/partials/head.view.php");
 ?>
 <div class="container">
-    <h1>Un commit</h1>
-    <p><?= $myCommit->getText(); ?></p>
-    <p>Date de création <?= $myCommit->getCreationDate();?></p>
-
-
+    
+    <div class="card text-center text-bg-dark my-2">
+        <div class="card-header">
+            <p><?= $myAuthor ? $myAuthor->getPseudo() : '' ?></p>
+        </div>
+        <div class="card-body">
+            <p><?= $myCommit->getText(); ?></p>
+        </div>
+        <div class="card-footer text-light">
+            <p>Date : <?= $myCommit->getModificationDate() ? $myCommit->getModificationDate() : $myCommit->getCreationDate() ?></p>
+        <?php
+            if(isset($_SESSION['user']) && $_SESSION['user']['id_user'] === $myCommit->getUserId()){
+        ?>
+            <a href="/modifier?id=<?= $myCommit->getIdCommit();?>" class="btn btn-warning">Modifier</a>
+        <?php }?>
+        </div>
+    </div>
+        
     <?php
-        if($myCommit->getModificationDate()){
-            ?>
-                <p>Date de modification <?= $myCommit->getModificationDate();?></p>
-            <?php
-        }
-    ?>
-
-    <?php
-        if(isset($_SESSION['user']) && $_SESSION['user']['id_user'] === $myCommit->getUserId()){
-    ?>
-        <a href="/modifier?id=<?= $myCommit->getIdCommit();?>" class="btn btn-warning">Modifier</a>
-    <?php
-        }
         if(isset($_SESSION['user'])){
         ?>
             <form method="POST">
@@ -45,9 +45,9 @@ require_once(__DIR__ . "/partials/head.view.php");
             foreach($comments as $comment)
             {
                 ?>
-                    <div class="card my-2">
+                    <div class="card my-2 text-bg-secondary">
                     <div class="card-header">
-                        <?= $comment->getIdUser(); ?>
+                        <?= $comment->getPseudo(); ?>
                     </div>
                     <div class="card-body">
                         <figure>
@@ -73,7 +73,6 @@ require_once(__DIR__ . "/partials/head.view.php");
                             <?php
                         }
                         ?>
-
                     </div>
                     </div>
                 <?php

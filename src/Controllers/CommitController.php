@@ -2,8 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\Comment;
+use App\Models\User;
 use App\Models\Commit;
+use App\Models\Comment;
 use App\Utils\AbstractController;
 
 //impoter la class le "use"
@@ -46,14 +47,18 @@ class CommitController extends AbstractController
                     $this->totalCheck('comment', $text);
                     if(empty($this->arrayError)){
                         $today = date("Y-m-d");
-                        $comment = new Comment(null, $text, $today, null, $id, $_SESSION['user']['id_user']);
+                        $comment = new Comment(null, $text, $today, null, $id, $_SESSION['user']['id_user'], null);
                         $comment->addComment();
                         $this->redirectToRoute('/commit?id=' . $id, 200);
                     }
                 }
 
-                $searchComment = new Comment(null, null, null, null, $id, null);
+                $searchComment = new Comment(null, null, null, null, $id, null, null);
                 $comments = $searchComment->getCommentByCommit();
+
+                //récuperer l'autheur du commit
+                $author = new User($myCommit->getUserId(), null, null, null, null, null, null, null);
+                $myAuthor = $author->getUserById();
 
                 require_once(__DIR__ . "/../Views/commit.view.php");
             }else{

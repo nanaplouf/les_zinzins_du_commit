@@ -52,6 +52,20 @@ class User
         }
     }
 
+    public function getUserById()
+    {
+        $pdo = Database::getConnection();
+        $sql = "SELECT `id_user`, `pseudo`, `id_role` FROM `user` WHERE `id_user` = ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$this->id_user]);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if($result){
+            return new User($result['id_user'], $result['pseudo'], null, null, null, null, null,  $result['id_role']);
+        }else{
+            return false;
+        }
+    }
+
     //les get
 
     public function getIdUser(): int|string|null
