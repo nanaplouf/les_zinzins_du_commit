@@ -79,6 +79,15 @@ class Comment
         return $stmt->execute([$this->text, $this->modification_date, $this->id_comment]);
     } 
 
+    //méthode pour supprimer un commentaire
+    public function deleteComment()
+    {
+        $pdo = Database::getConnection();
+        $sql = "DELETE FROM `comment` WHERE `id_comment` = ?";
+        $stmt = $pdo->prepare($sql);
+        return $stmt->execute([$this->id_comment]);
+    }
+
     public function getIdComment(): ?int
     {
         return $this->id_comment;
