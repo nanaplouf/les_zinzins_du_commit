@@ -59,11 +59,21 @@ require_once(__DIR__ . "/partials/head.view.php");
                             <?= $comment->getModificationDate() ? $comment->getModificationDate() : $comment->getCreationDate(); ?>
                         </figcaption>
                         </figure>
-                        <?php if($_SESSION['user'] && $_SESSION['user']['id_user'] === $comment->getIdUser()){
+                        <?php if(isset($_SESSION['user']) && $_SESSION['user']['id_user'] === $comment->getIdUser()){
                             ?>
                             <a class="btn btn-warning"  href="/modifCommentaire?id=<?= $comment->getIdComment() ?>">Modifier</a>
                             <?php
-                        } ?>
+                        } 
+                        if((isset($_SESSION['user']) && $_SESSION['user']['id_user'] === $comment->getIdUser()) || isset($_SESSION['user']) && $_SESSION['user']['id_role'] === 1){
+                            ?>
+                            <form action="/supprimerCommentaire" method="POST">
+                                <input type="hidden" name="id" value="<?= $comment->getIdComment() ?>">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                            <?php
+                        }
+                        ?>
+
                     </div>
                     </div>
                 <?php
