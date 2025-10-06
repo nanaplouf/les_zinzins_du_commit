@@ -59,6 +59,11 @@ require_once(__DIR__ . "/partials/head.view.php");
                             <?= $comment->getModificationDate() ? $comment->getModificationDate() : $comment->getCreationDate(); ?>
                         </figcaption>
                         </figure>
+                        <?php if($_SESSION['user'] && $_SESSION['user']['id_user'] === $comment->getIdUser()){
+                            ?>
+                            <a class="btn btn-warning"  href="/modifCommentaire?id=<?= $comment->getIdComment() ?>">Modifier</a>
+                            <?php
+                        } ?>
                     </div>
                     </div>
                 <?php

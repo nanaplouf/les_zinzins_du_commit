@@ -54,6 +54,31 @@ class Comment
         return $comments;
     }
 
+    //méthode pour aller chercher un commentaire depuis sont id:
+    public function getCommentById()
+    {
+        $pdo = Database::getConnection();
+        $sql = "SELECT `id_comment`, `text`, `creation_date`, `modification_date`, `id_commit`, `id_user`
+        FROM `comment` WHERE `id_comment` = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$this->id_comment]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result){
+            return new Comment($result['id_comment'], $result['text'], $result['creation_date'] , $result['modification_date'] , $result['id_commit'] , $result['id_user']);
+        }else{
+            return false;
+        }
+    }
+
+    //méthode pour modifier le commentaire:
+    public function editComment()
+    {
+        $pdo = Database::getConnection();
+        $sql = "UPDATE `comment` SET `text` = ?, `modification_date` = ? WHERE `id_comment` = ?";
+        $stmt = $pdo->prepare($sql);
+        return $stmt->execute([$this->text, $this->modification_date, $this->id_comment]);
+    } 
+
     public function getIdComment(): ?int
     {
         return $this->id_comment;
