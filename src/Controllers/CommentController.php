@@ -38,8 +38,6 @@ class CommentController extends AbstractController
                 $this->RedirectToRoute('/', 302);
             }
             
-
-
             //Si la personne clique sur le submit alors vérifier les erreurs puis créer une méthode update pour envoyer la modification
         }else{
             $this->RedirectToRoute('/', 302);

@@ -13,8 +13,9 @@ class Comment
     private ?string $modification_date;
     private ?int $id_commit;
     private ?int $id_user;
+    private ?string $pseudo;
 
-    public function __construct(?int $id_comment, ?string $text, ?string $creation_date, ?string $modification_date, ?int $id_commit, ?int $id_user)
+    public function __construct(?int $id_comment, ?string $text, ?string $creation_date, ?string $modification_date, ?int $id_commit, ?int $id_user, ?string $pseudo)
     {
         $this->id_comment = $id_comment;
         $this->text = $text;
@@ -22,6 +23,7 @@ class Comment
         $this->modification_date = $modification_date;
         $this->id_commit = $id_commit;
         $this->id_user = $id_user;
+        $this->pseudo = $pseudo;
     }
 
     public function addComment()
@@ -36,8 +38,10 @@ class Comment
     public function getCommentByCommit()
     {
         $pdo = Database::getConnection();
-        $sql = "SELECT `id_comment`, `text`, `creation_date`, `modification_date`, `id_commit`, `id_user` 
-        FROM `comment` WHERE `id_commit` = ?";
+        $sql = "SELECT `comment`.`id_comment`, `comment`.`text`, `comment`.`creation_date`, `comment`.`modification_date`, `comment`.`id_commit`, `comment`.`id_user`, `user`.`pseudo`
+        FROM `comment` 
+        INNER JOIN `user` ON `comment`.`id_user` = `user`.`id_user`
+        WHERE `id_commit` = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$this->id_commit]);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -47,7 +51,7 @@ class Comment
         //Je boucle sur mon tableau de resultat pour créer un nouvel objet de chaque resultat
         foreach($result as $row){
             //Je créer un nouvel objet
-            $comment = new Comment($row['id_comment'], $row['text'], $row['creation_date'], $row['modification_date'], $row['id_commit'], $row['id_user']);
+            $comment = new Comment($row['id_comment'], $row['text'], $row['creation_date'], $row['modification_date'], $row['id_commit'], $row['id_user'], $row['pseudo']);
             //Je l'insert dans mon tableau
             $comments[] = $comment;
         }
@@ -64,7 +68,7 @@ class Comment
         $stmt->execute([$this->id_comment]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if($result){
-            return new Comment($result['id_comment'], $result['text'], $result['creation_date'] , $result['modification_date'] , $result['id_commit'] , $result['id_user']);
+            return new Comment($result['id_comment'], $result['text'], $result['creation_date'] , $result['modification_date'] , $result['id_commit'] , $result['id_user'], null);
         }else{
             return false;
         }
@@ -111,6 +115,11 @@ class Comment
     public function getIdUser(): ?int
     {
         return $this->id_user;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
     }
 
     public function setIdComment(?int $id_comment): void
